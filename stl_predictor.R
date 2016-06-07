@@ -1,6 +1,6 @@
 library(forecast)
 
-metric_name <- "memory.memory.free.value.csv"
+metric_name <- "netlink.eth0.if_octets.rx.csv"
 data_end <- 8640
 
 stl_series <- ts(resampled[1:data_end, metric_name], frequency = 1440)
