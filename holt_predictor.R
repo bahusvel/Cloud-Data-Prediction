@@ -1,8 +1,13 @@
 library(forecast)
 
-metric_name <- "memory.memory.free.value.csv"
-data_end <- 8640
+metric_name <- "cpu.0.cpu.idle.value.csv"
 
-stl_series <- ts(resampled[1:data_end, metric_name], frequency = 1440)
-holt_fit <- forecast.HoltWinters(stl_series)
-plot.forecast(forecast.HoltWinters(holt_fit, h = 1440 * 2))
+full_series <- ts(final[[metric_name]], frequency = 1440)
+train_series <- window(full_series, start=1,end=4)
+test_series <- window(full_series, start=4)
+fit_result <- HoltWinters(train_series)
+
+forecast_results <- forecast.HoltWinters(fit_result, h = 2880)
+plot(forecast_results)
+
+accuracy(forecast_results, test_series)

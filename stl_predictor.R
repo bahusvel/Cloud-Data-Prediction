@@ -1,8 +1,13 @@
 library(forecast)
 
 metric_name <- "cpu.0.cpu.idle.value.csv"
-data_end <- 8640
 
-stl_series <- ts(final[1:data_end, metric_name], frequency = 1440)
-stl_fit <- stl(x = stl_series, s.window = "per")
-plot(forecast(stl_fit))
+full_series <- ts(final[[metric_name]], frequency = 1440)
+train_series <- window(full_series, start=1,end=4)
+test_series <- window(full_series, start=4)
+fit_result <- stl(x = train_series, s.window = "per", robust = TRUE)
+
+forecast_results <- forecast(fit_result)
+plot(forecast_results)
+
+accuracy(forecast_results, test_series)
