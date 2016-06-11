@@ -1,0 +1,2 @@
+fit_result <- HoltWinters(train_series)
+forecast_results <- forecast.HoltWinters(fit_result, h = 2880)

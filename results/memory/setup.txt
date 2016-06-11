@@ -1,0 +1,2 @@
+fit_result <- stl(x = train_series, s.window = "per", robust = TRUE)
+forecast_results <- forecast(fit_result, method = 'rwdrift')
