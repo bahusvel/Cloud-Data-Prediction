@@ -1,6 +1,6 @@
 library(forecast)
 
-metric_name <- "cpu.1.cpu.idle.value.csv"
+metric_name <- "netlink.eth0.if_octets.rx.csv"
 
 full_series <- ts(final[[metric_name]], frequency = 1440)
 train_series <- window(full_series, start=1,end=4)
